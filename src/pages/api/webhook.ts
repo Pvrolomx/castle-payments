@@ -38,8 +38,8 @@ async function sendPaymentNotification(slug: string, amount: number, currency: s
           `Fecha: ${new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })}
 
 ` +
-          `Ver detalles: https://pay.expatadvisormx.com/admin`,
-        name: 'Rolo Payments'
+          `Ver detalles: https://castle-payments.vercel.app/admin`,
+        name: 'Castle Payments'
       }),
     });
     const result = await response.json();
