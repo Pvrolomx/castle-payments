@@ -22,7 +22,7 @@ export default function Home() {
       <div style="font-family: Georgia, serif; padding: 40px; max-width: 600px;">
         <div style="text-align: center; margin-bottom: 40px; border-bottom: 1px solid #e5e5e5; padding-bottom: 30px;">
           <h1 style="font-size: 24px; font-weight: normal; letter-spacing: 2px; margin: 0; color: #333;">CASTLE SOLUTIONS</h1>
-          <p style="color: #888; font-style: italic; margin: 5px 0 0 0;">Real Estate & Relocation</p>
+          <p style="color: #888; font-style: italic; margin: 5px 0 0 0;">Real Estate, Rentals and Property Management</p>
         </div>
         
         <div style="margin-bottom: 30px;">
@@ -76,7 +76,7 @@ export default function Home() {
           <h1 className="text-2xl font-light tracking-wide text-stone-800 mb-1">
             CASTLE SOLUTIONS
           </h1>
-          <p className="text-stone-400 text-sm italic">Real Estate & Relocation</p>
+          <p className="text-stone-400 text-sm italic">Real Estate, Rentals and Property Management</p>
         </div>
 
         {/* Payment Card */}
