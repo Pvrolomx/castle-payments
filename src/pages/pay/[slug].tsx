@@ -2,7 +2,6 @@ import { GetServerSideProps } from 'next';
 import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Invoice, getInvoiceBySlug, updateInvoiceBySlug } from '@/lib/invoices';
-import { paymentConfig } from '@/lib/config';
 
 interface Props {
   invoice: Invoice | null;
@@ -50,8 +49,6 @@ const translations = {
 
 export default function PaymentPage({ invoice, stripeKey }: Props) {
   const [loading, setLoading] = useState(false);
-  const [showWire, setShowWire] = useState(false);
-  const [showOther, setShowOther] = useState(false);
   const [lang, setLang] = useState<'en' | 'es'>('en');
 
   const t = translations[lang];
@@ -247,89 +244,46 @@ export default function PaymentPage({ invoice, stripeKey }: Props) {
                 {loading ? t.processing : `${t.payWithCard} $${invoice.total.toLocaleString()}`}
               </button>
 
-              {/* Other Payment Methods */}
-              <div className="border-t border-stone-100 pt-4">
-                <button
-                  onClick={() => setShowOther(!showOther)}
-                  className="w-full flex justify-between items-center text-stone-500 hover:text-stone-700 text-sm py-2"
-                >
-                  <span>{t.otherMethods}</span>
-                  <span className="text-xs">{showOther ? '▲' : '▼'}</span>
-                </button>
+              {/* Other Payment Methods - Individual Dropdowns */}
+              <div className="border-t border-stone-100 pt-4 space-y-2">
+                <p className="text-xs uppercase tracking-wider text-stone-400 mb-3">{t.otherMethods}</p>
                 
-                {showOther && (
-                  <div className="mt-3 space-y-2">
-                    {paymentConfig.zelle?.email && (
-                      <div className="flex items-center justify-between p-3 bg-stone-50 rounded text-sm">
-                        <span className="text-stone-600">Zelle</span>
-                        <span className="text-stone-500 text-xs">{paymentConfig.zelle.email}</span>
-                      </div>
-                    )}
-                    {paymentConfig.venmo?.handle && (
-                      <div className="flex items-center justify-between p-3 bg-stone-50 rounded text-sm">
-                        <span className="text-stone-600">Venmo</span>
-                        <span className="text-stone-500 text-xs">{paymentConfig.venmo.handle}</span>
-                      </div>
-                    )}
-                    {paymentConfig.paypal?.email && (
-                      <div className="flex items-center justify-between p-3 bg-stone-50 rounded text-sm">
-                        <span className="text-stone-600">PayPal</span>
-                        <span className="text-stone-500 text-xs">{paymentConfig.paypal.email}</span>
-                      </div>
-                    )}
-                    {paymentConfig.wise?.email && (
-                      <div className="flex items-center justify-between p-3 bg-stone-50 rounded text-sm">
-                        <span className="text-stone-600">Wise</span>
-                        <span className="text-stone-500 text-xs">{paymentConfig.wise.email}</span>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-
-              {/* Wire Transfer */}
-              {paymentConfig.showWireTransfer && (
-              <div className="border-t border-stone-100 pt-4 mt-4">
-                <button
-                  onClick={() => setShowWire(!showWire)}
-                  className="w-full flex justify-between items-center text-stone-500 hover:text-stone-700 text-sm py-2"
-                >
-                  <span>{t.wireTransfer}</span>
-                  <span className="text-xs">{showWire ? '▲' : '▼'}</span>
-                </button>
+                {/* Zelle */}
+                <div className="flex items-center justify-between p-3 bg-stone-50 rounded text-sm">
+                  <span className="text-stone-600">Zelle</span>
+                  <span className="text-stone-400 text-xs italic">Coming soon</span>
+                </div>
                 
-                {showWire && (
-                  <div className="mt-4 text-xs text-stone-500 space-y-3 font-mono">
-                    <div>
-                      <p className="text-stone-400 uppercase tracking-wider mb-1">{t.beneficiary}</p>
-                      <p className="text-stone-700">{paymentConfig.wire.beneficiary}</p>
-                      <p className="text-stone-500 text-[10px] mt-1">{paymentConfig.wire.beneficiaryAddress}</p>
-                    </div>
-                    <div>
-                      <p className="text-stone-400 uppercase tracking-wider mb-1">{t.bank}</p>
-                      <p className="text-stone-700">{paymentConfig.wire.bank}</p>
-                      <p className="text-stone-500 text-[10px] mt-1">{paymentConfig.wire.bankAddress}</p>
-                    </div>
-                    <div>
-                      <p className="text-stone-400 uppercase tracking-wider mb-1">SWIFT</p>
-                      <p className="text-stone-700">{paymentConfig.wire.swift}</p>
-                    </div>
-                    <div>
-                      <p className="text-stone-400 uppercase tracking-wider mb-1">CLABE</p>
-                      <p className="text-stone-700">{paymentConfig.wire.clabe}</p>
-                    </div>
-                    <div>
-                      <p className="text-stone-400 uppercase tracking-wider mb-1">Account</p>
-                      <p className="text-stone-700">{paymentConfig.wire.account}</p>
-                    </div>
-                    <div>
-                      <p className="text-stone-400 uppercase tracking-wider mb-1">RFC (Tax ID)</p>
-                      <p className="text-stone-700">{paymentConfig.wire.rfc}</p>
-                    </div>
-                  </div>
-                )}
+                {/* Venmo */}
+                <div className="flex items-center justify-between p-3 bg-stone-50 rounded text-sm">
+                  <span className="text-stone-600">Venmo</span>
+                  <span className="text-stone-400 text-xs italic">Coming soon</span>
+                </div>
+                
+                {/* PayPal */}
+                <div className="flex items-center justify-between p-3 bg-stone-50 rounded text-sm">
+                  <span className="text-stone-600">PayPal</span>
+                  <span className="text-stone-400 text-xs italic">Coming soon</span>
+                </div>
+                
+                {/* Wise */}
+                <div className="flex items-center justify-between p-3 bg-stone-50 rounded text-sm">
+                  <span className="text-stone-600">Wise</span>
+                  <span className="text-stone-400 text-xs italic">Coming soon</span>
+                </div>
+                
+                {/* Global Transfer */}
+                <div className="flex items-center justify-between p-3 bg-stone-50 rounded text-sm">
+                  <span className="text-stone-600">Global Transfer</span>
+                  <span className="text-stone-400 text-xs italic">Coming soon</span>
+                </div>
+                
+                {/* Wire Transfer */}
+                <div className="flex items-center justify-between p-3 bg-stone-50 rounded text-sm">
+                  <span className="text-stone-600">{t.wireTransfer}</span>
+                  <span className="text-stone-400 text-xs italic">Coming soon</span>
+                </div>
               </div>
-              )}
             </>
           )}
         </div>
