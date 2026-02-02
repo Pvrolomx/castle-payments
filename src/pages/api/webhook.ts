@@ -38,7 +38,7 @@ async function sendPaymentNotification(slug: string, amount: number, currency: s
           `Fecha: ${new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })}
 
 ` +
-          `Ver detalles: https://castle-payments.vercel.app/admin`,
+          `Ver detalles: https://castle-payments.castlesolutions.mx/admin`,
         name: 'Castle Payments'
       }),
     });
