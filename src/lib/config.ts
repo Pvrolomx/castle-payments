@@ -1,4 +1,7 @@
 export const paymentConfig = {
+  // Flag para mostrar/ocultar secciones sin datos
+  showWireTransfer: false, // Habilitar cuando tenga datos bancarios reales
+  
   zelle: {
     email: 'castle@castlesolutions.mx'
   },
@@ -12,14 +15,14 @@ export const paymentConfig = {
     email: 'castle@castlesolutions.mx'
   },
   wire: {
-    beneficiary: '[PENDIENTE - NOMBRE BENEFICIARIO]',
-    beneficiaryAddress: '[PENDIENTE - DIRECCION]',
-    bank: '[PENDIENTE - BANCO]',
-    bankAddress: '[PENDIENTE - DIRECCION BANCO]',
-    swift: '[PENDIENTE - SWIFT]',
-    clabe: '[PENDIENTE - CLABE]',
-    account: '[PENDIENTE - CUENTA]',
-    rfc: '[PENDIENTE - RFC]'
+    beneficiary: '',
+    beneficiaryAddress: '',
+    bank: '',
+    bankAddress: '',
+    swift: '',
+    clabe: '',
+    account: '',
+    rfc: ''
   },
   whatsapp: '+52 322 XXX XXXX'
 };
