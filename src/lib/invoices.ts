@@ -85,7 +85,7 @@ export async function getAllInvoices(): Promise<Invoice[]> {
   }
 
   const { data, error } = await supabase
-    .from('invoices')
+    .from('castle_invoices')
     .select('*')
     .order('created_at', { ascending: false });
 
@@ -103,7 +103,7 @@ export async function getInvoiceBySlug(slug: string): Promise<Invoice | null> {
   }
 
   const { data, error } = await supabase
-    .from('invoices')
+    .from('castle_invoices')
     .select('*')
     .eq('slug', slug)
     .single();
@@ -124,7 +124,7 @@ export async function getInvoiceById(id: string): Promise<Invoice | null> {
   }
 
   const { data, error } = await supabase
-    .from('invoices')
+    .from('castle_invoices')
     .select('*')
     .eq('id', id)
     .single();
@@ -163,7 +163,7 @@ export async function createInvoice(data: {
   }
 
   const { error } = await supabase
-    .from('invoices')
+    .from('castle_invoices')
     .insert(invoiceToRow(invoice));
 
   if (error) {
@@ -197,7 +197,7 @@ export async function updateInvoiceStatus(
   }
 
   const { data, error } = await supabase
-    .from('invoices')
+    .from('castle_invoices')
     .update(updates)
     .eq('id', id)
     .select()
@@ -231,7 +231,7 @@ export async function updateInvoiceBySlug(
   }
 
   const { data, error } = await supabase
-    .from('invoices')
+    .from('castle_invoices')
     .update(updates)
     .eq('slug', slug)
     .select()
@@ -256,7 +256,7 @@ export async function deleteInvoice(id: string): Promise<boolean> {
   }
 
   const { error } = await supabase
-    .from('invoices')
+    .from('castle_invoices')
     .delete()
     .eq('id', id);
 
