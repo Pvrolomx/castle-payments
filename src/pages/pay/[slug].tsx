@@ -288,6 +288,7 @@ export default function PaymentPage({ invoice, stripeKey }: Props) {
               </div>
 
               {/* Wire Transfer */}
+              {paymentConfig.showWireTransfer && (
               <div className="border-t border-stone-100 pt-4 mt-4">
                 <button
                   onClick={() => setShowWire(!showWire)}
@@ -328,6 +329,7 @@ export default function PaymentPage({ invoice, stripeKey }: Props) {
                   </div>
                 )}
               </div>
+              )}
             </>
           )}
         </div>
